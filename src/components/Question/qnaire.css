@@ -1,0 +1,217 @@
+/* UI details */
+
+html {
+  scroll-behavior: smooth;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Questionnaire Page */
+
+.qnaire-q-main-container {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.qnaire-q-question-navbar {
+  padding: 1em 0.1em;
+}
+
+.qnaire-q-question-navbar a {
+  color: black;
+  text-decoration: none;
+}
+
+.qnaire-q-question-navbar li:hover {
+  font-weight: 800;
+}
+
+.qnaire-q-question-navbar h5 {
+  text-align: center;
+  font-weight: 800;
+}
+
+.qnaire-q-question-display {
+  height: 100vh;
+  padding: 0 2em;
+  overflow-y: auto;
+}
+
+
+.qnaire-q-question-saveall-container {
+  width: 100%;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qnaire-q-question-saveall-container button {
+  width: 100%;
+  margin: 0 1.25rem;
+}
+
+.qnaire-q-question-add-container {
+  display: grid;
+  margin: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.qnaire-q-question-add-container button {
+  margin: 0.2rem 0.25rem;
+}
+
+.qnaire-q-edit-card-container {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  margin: 1.5em 0;
+}
+
+.qnaire-q-edit-card-utils-container {
+  margin-right: 0.5em;
+}
+
+.qnaire-q-edit-card-utils-container .card-header {
+  padding: 0.95em 1em;
+}
+
+.qnaire-q-edit-card-utils-container .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qnaire-q-edit-card-utils-container button {
+  margin: 0.2em 0;
+}
+
+/* Question Display */
+
+.question-cards-container {
+  margin: 1% auto;
+  max-width: 800px;
+}
+
+.question-cards-container .card {
+  margin: 2rem 0;
+}
+
+.question-cards-container .card hr {
+  margin: 1rem 0 0 0;
+}
+
+.question-display-header {
+  display: flex;
+  align-items: center;
+}
+
+.question-display-title {
+  margin: 0.5rem;
+}
+
+.question-display-detail {
+  margin: 0 0 1rem 0;
+}
+
+.question-display-content {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.question-display-content input {
+  display: inline;
+  white-space: nowrap;
+  margin: 0.1rem 0.25rem;
+}
+
+.question-display-content .form-check {
+  display: flex;
+  align-items: center;
+}
+
+.question-display-content .form-check input {
+  min-width: 1rem;
+  min-height: 1rem;
+}
+
+.question-display-content .form-check label {
+  margin: 0 0 0 1rem;
+}
+
+.question-display-content button {
+  margin: 0 0.25rem;
+}
+
+.question-display-content fieldset {
+  margin: 0 0 0.75rem 0;
+}
+
+.question-display-content input[type="radio"],
+.question-display-content input[type="checkbox"] {
+  display: block;
+}
+
+.question-display-table-answers-container {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+/* Question Edit */
+
+.card-border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-question-contents-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-edit-form .row {
+  display: flex;
+  align-items: center;
+}
+
+.question-edit-form button {
+  margin: 0 0.4em 0 0;
+}
+
+.mc-options-editor .fib-options-editor {
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 0;
+}
+
+.mc-options-editor tr td:not(:first-child) {
+  /* fix the width of columns except for option text */
+  width: 1px;
+  white-space: nowrap;
+}
+
+.mc-options-editor input[type="number"] {
+  width: 4em;
+}
+
+.mc-options-buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.mc-options-buttons-container button {
+  margin: 0.1em;
+}
+
+.mc-options-blank {
+  display: inline;
+  width: 10em;
+}

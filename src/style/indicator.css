@@ -1,0 +1,44 @@
+.indicator-edit-main-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.indicator-edit-indicators-container,
+.indicator-edit-incomplete-container {
+  padding: 1em;
+  width:750px;
+}
+
+.indicator-edit-indicators-container .tab-pane {
+  border: 1px solid #dee2e6;
+  padding: 1em;
+}
+
+.indicator-edit-indicators-container form button {
+  margin: 1em 0 0 0;
+}
+
+.indicator-tree-node-utils-container button {
+  margin: 0.5em 0.5em 1em 0;
+}
+
+.indicator-edit-incomplete-container:hover {
+  
+  margin: 0.5em 0.5em 1em 0;
+}
+
+
+.IndicatorButton{
+  margin-left:0px;
+  margin-top:-38px;
+  float:right;
+}  /* 管理员页面指标编辑旁边的添加按钮 */
+.A-indicator-edit{
+  margin-top:0px;
+  margin-bottom: -20px;
+} /*管理员页面指标编辑字*/
+
+.indicatoradd{
+  margin-top:20px;
+  margin-bottom: -10px;
+}

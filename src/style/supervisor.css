@@ -1,0 +1,272 @@
+.div-test {
+    margin-left: 130px;
+}
+
+.supervisor-interface {
+    background: rgb(248, 248, 248);
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 2%;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 7%;
+    border-style: outset;
+}
+
+
+.pagination {
+    float: right;
+    color: #61dafb;
+}
+
+.actived {
+    background-color: royalblue;
+    color: white
+}
+
+.side-menu {
+    display: flex;
+    
+    color: white;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    width: 130px;
+    height: 100%;
+    background-color: #2f4050;
+}
+.img-center{
+  margin:0px auto;
+  
+
+}
+/* Remove arrow when input phone number  */
+input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+
+/* Tree */
+.d-tree-container{
+    list-style: none;
+    padding: 0;
+  }
+  
+  .d-tree-node{
+    padding: 0rem 15px;
+  
+  }
+  
+  .d-tree-toggler.active{
+    transform: rotate(90deg);
+  }
+  
+  .d-tree-font{
+    font-size: 13pt;
+  }
+  
+  .list{
+    border-radius: 25px;
+    text-align:initial;
+    width:auto;
+    height: 1%;
+    padding: 0px;
+    color:black;
+    border: 0.5px solid rgb(207, 200, 200); 
+  }
+
+  .img-center{
+    margin: 0px auto;
+  }
+.supervisorwelcome{
+  margin-top:0px;
+  margin-left:0px;
+}  /*supervisor页面的欢迎两字*/
+.supevisorButton{
+  margin-top:35px;
+  margin-bottom: -40px;
+}  /*supervisor页面的添加按钮*/
+.institutionpresentation{
+  margin-top:30px;
+  margin-bottom: -28px;
+}
+ .S-adduser{
+  margin-bottom: -100px;
+}
+/*.S-project-modal{
+  margin-left:10px;
+  width:1000px;
+  max-width: 1000px;
+  height:600px;
+}
+.S-project-modal-form{
+  width:200px;
+  height:600px;
+  max-width: 1000px;
+  float: auto;
+} */
+.supervisor-edit-modal{
+  width:800px;
+  height:500px;
+}
+
+/* supervisor页面三项功能里面的modal框修改 */
+.modal-content{
+  width:900px;
+  height:640px;
+  margin-left:-200px;
+  margin-top:-20px;
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+} 
+.mb-3{
+
+  width:400px;
+}
+.indicator-edit-modal{
+  width:1000px;
+  height:500px;
+}
+.mb-4{
+  margin-top: -470px;
+  margin-left:500px;
+}
+.mb-5{
+  margin-left:510px;
+  margin-top:-30px;
+  width:300px;
+}
+/* .modal-footer{
+  margin-top:-50px;
+  border-top: ;
+} */
+.modal-title{
+  margin-top:-30px;
+}
+.modal-title2{
+  margin-top:20px;
+  margin-bottom: -10px;;
+}
+.modal-title3{
+  margin-top:20px;
+  margin-bottom: -10px;;
+}
+.starttime1{
+  margin-top: -470px;
+  margin-left:500px;
+}
+.state1{
+  margin-left:510px;
+  margin-top:-5px;
+  width:300px;
+}
+/* 添加人员 */
+.addpeople{
+  margin-top:20px;
+  margin-bottom: -10px;;
+}
+/* 添加人员右边栏 */
+.work-area{
+  margin-top: -317px;
+  margin-left:450px;
+}
+.emailaddress{
+  margin-top: 10px;
+  margin-left:450px;
+}
+.phonenumber{
+  margin-top: 10px;
+  margin-left:450px;
+}
+.usertype-{
+  margin-top: 10px;
+  margin-left:450px;
+}
+/* 添加人员左边栏 */
+.username-{
+  margin-top: 40px;
+  width:400px;
+}
+.userpassword-{
+  margin-top: 12px;
+  margin-left:0px;
+  width:400px;
+}
+.userdetails-{
+  margin-top: 12px;
+  margin-left:0px;
+  width:400px;
+}
+.userposition-{
+  margin-top: 12px;
+  margin-left:0px;
+  width:400px;
+}
+/* 编辑用户修改信息 */
+.modifyinformation{
+  margin-top:20px;
+  margin-bottom: -10px;;
+}
+.emailinformation-{
+  margin-top: -333px;
+  margin-left:450px;
+ 
+}
+.phonenumberinfo-{
+  margin-top: 10px;
+  margin-left:450px;
+}
+.usertypeinfo-{
+  margin-top: 10px;
+  margin-left:450px;
+}
+/* 修改信息左边栏 */
+.usernameinfo-{
+  margin-top: 40px;
+  width:400px;
+}
+.namedetailsinfo-{
+  margin-top: 12px;
+  width:400px;
+}
+.positioninfo-{
+  margin-top: 12px;
+  width:400px;
+}
+.workareainfo-{
+  margin-top: 12px;
+  width:400px;
+}
+/* 编辑机构 */
+.editinstitution-{
+  margin-top:20px;
+  margin-bottom: -10px;
+}
+.addinstitution-{
+  margin-top:30px;
+}
+.addupperinstitution-{
+  margin-top:20px;
+  margin-bottom: -10px;
+}
+.editcurrentinstitution-{
+  margin-top:20px;
+  margin-bottom: -10px;
+}
+.addlowerinstitution-{
+  margin-top:20px;
+  margin-bottom: -10px;
+}

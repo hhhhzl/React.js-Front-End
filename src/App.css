@@ -1,0 +1,12 @@
+.side-text:hover{
+    background-color: #555;
+    color: white;
+}
+
+.loading-spinner-container {
+    width: 100%;
+    height: calc(100vh - 96px); /* navbar height 96px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
