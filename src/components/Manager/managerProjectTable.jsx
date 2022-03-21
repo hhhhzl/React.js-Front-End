@@ -14,11 +14,6 @@ const { ExportCSVButton } = CSVExport;
 
 function ActionsFormatter(props) {
 
-
-
-
-
-
     return (
         <div>
             <Button>查看此项目</Button>

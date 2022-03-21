@@ -10,3 +10,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.supervisor-edit-modal{
+    width:800px;
+    height:flex;
+  }
+
+
+.sidebar-max{
+    height: max-content;
+}
+  

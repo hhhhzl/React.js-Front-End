@@ -3,6 +3,8 @@ import apiService from "./apiService";
 // users
 export const apiGetAllUsers = () =>
     apiService.get(`users/`);
+export const apiUpdateAllUsers = (data) =>
+    apiService.patch(`users/`,data);
 export const apiGetUser = (userID) =>
     apiService.get(`users/${userID}/`);
 export const apiUpdateUser = (userID, data) =>

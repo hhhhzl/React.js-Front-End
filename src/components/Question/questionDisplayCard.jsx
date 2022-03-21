@@ -17,7 +17,6 @@ const mapQuestionTypeDisplay = {
   6: QuestionAttachmentDisplay,
 };
 export default function QuestionDisplayCard({ questionType, ...props }) {
-  
   const QuestionComponent = mapQuestionTypeDisplay[questionType];
   return (
     <Card>

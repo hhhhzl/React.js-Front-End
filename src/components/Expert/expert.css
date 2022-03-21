@@ -22,16 +22,21 @@
     border-style:hidden;
 }*/
 
+.questionIndex{
+  margin-top: 0%;
+    margin-left: 1%;
+    margin-right: 5%;
+}
+
 .cardOne{
-    max-width: 700px;
-    
-    width:700px;
+    max-width: 1000px;
+    width:900px;
+    min-height: 500px;
     height:500px;
     margin:20px;
-   
     margin-top: 0%;
-    margin-left: 0%;
-    margin-right: 10%;
+    margin-left: 1%;
+    margin-right: 5%;
     border-radius: 2%;
     padding-left: 2%;
     padding-top: 3%;
@@ -40,7 +45,7 @@
 
 }
 .cardtwo{
-    width:350px;
+    width: 370px;
     height:500px;
     margin:20px;
     margin-top: 0%;
@@ -103,6 +108,7 @@
     align-items: center;
     flex-direction: row;
     width:500px;
+    height:fit-content;
   }
   
 .aaaa label {
@@ -118,9 +124,10 @@
   }
 .scoreheader{
       background-color:gainsboro;
-      width:335px;
+      width:350px;
       height:60px;
-      margin-left:0%;
+      margin-left:1%;
+      margin-right:1%;
       margin-top:0%;
   }
 .scoretitle{
@@ -129,7 +136,7 @@
   }
 .questionheader{
     background-color:gainsboro;
-    width:670px;
+    width:860px;
     height:60px;
     margin-left:0%;
     margin-top:-1.5%;
@@ -137,31 +144,34 @@
 .questiontitle{
     margin-left:48%;
     margin-top:1%;
+    font-size: 15pt;
   }
 .questionbody{
+    min-height: 200px;
+    height:300px;
     background-color:ghostwhite;
-    width:670px;
-    height:200px;
-    margin-left:0%
+    width:860px;
+    margin-left:0%;
   }
 .questioncontentcard{
+      width: 850px;
       margin-left:0%;
-      margin-top:10%;
+      margin-top:0%;
   }
 .scorebody{
     background-color:ghostwhite;
-    width:335px;
+    width:350px;
     height:200px;
-    margin-left:0%
+    margin-left:1%
   }
 .annotation{
-    margin-left:10%;
+    margin-left:3%;
     margin-top:10%;
   }
 .scorecontentcard{
     color:red;
-    margin-left:45%;
-    margin-top:25%;
+    margin-left:43%;
+    margin-top:15%;
   }
 .lastquestion{
       margin-left:60%;
@@ -169,5 +179,5 @@
   }
 .nextquestion{
       margin-left:80%;
-      margin-top:-10.5%;
+      margin-top:-7%;
   }

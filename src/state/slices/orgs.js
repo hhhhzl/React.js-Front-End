@@ -106,6 +106,7 @@ export default OrgsSlice.reducer;
 /* selectors */
 
 export const selectAllOrgs = (state) => state.orgs.items;
+export const selectTopOrgs = (state) => state.orgs.items.filter(u => u.parent_org == null);
 export const selectOrgById = (state, id) =>
   state.orgs.items.find((item) => item.id === id);
 export const selectErrorOrgs = (state) => state.orgs.error;

@@ -15,6 +15,7 @@ import {
   commitDraftsQE,
   selectDraftsQE,
   selectIsLoadingQE,
+  doublecommitDraftsQE,
 } from "../../state/slices/question-edit";
 import { mapQuestionType } from "../../constants/maps";
 import QuestionEditCard from "../Question/questionEditCard";
@@ -46,6 +47,7 @@ export default function QnaireQuestionEdit() {
           minScore: parseFloat(q.min_score),
           questionType: parseInt(q.question_type),
           rubric: q.rubric,
+          rubric_detail: q.rubric_detail,
           title: q.title,
         };
         try {
@@ -79,9 +81,13 @@ export default function QnaireQuestionEdit() {
       })
     );
   };
-
+  // onFocus={(e) =>dispatch(commitDraftsQE(),alert("已保存"), console.log("yibaocun"))}
+  const [show, setShow]=useState(false);
   const isLoading = useSelector(selectIsLoadingQE);
-
+  // setInterval(() => {
+  //   commitDraftsQE()
+  //   alert()
+  // }, 3000);
   return (
     <div className="qnaire-q-main-container">
       {isLoading ? (
@@ -90,20 +96,27 @@ export default function QnaireQuestionEdit() {
         </div>
       ) : (
         <>
-          <div className="qnaire-q-question-display">
+          <div className="qnaire-q-question-display" >
             {parsedDrafts.map((data, idx) => (
               <div key={data.id} id={`qnaire-question-edit-${idx + 1}`}>
                 <QuestionEditCard questionOrder={idx} qid={data.id} {...data} />
+
               </div>
             ))}
           </div>
           <div className="qnaire-q-question-navbar">
             <div className="qnaire-q-question-saveall-container">
+  
               <Button
+                type="button"
                 variant="outline-success"
-                onClick={() => dispatch(commitDraftsQE())}
+                onClick={() => dispatch(commitDraftsQE(),setInterval(alert("保存成功，请勿重复保存！！！"),3000))
+                // ,setInterval(alert("已保存,请勿重复保存"),3000)
+                         }
+
               >
                 保存编辑
+                
               </Button>
             </div>
 
@@ -120,16 +133,17 @@ export default function QnaireQuestionEdit() {
               ))}
             </div>
             <h5>问题列表</h5>
-            <ol>
+            <ul type ='circle'>
               {parsedDrafts.map((data, idx) => (
                 <li key={data.id}>
                   <a href={`#qnaire-question-edit-${idx + 1}`}>
-                    【{mapQuestionType[data.questionType]}题】
                     {data.title}
+                    【{mapQuestionType[data.questionType]}题】
                   </a>
                 </li>
               ))}
-            </ol>
+              </ul>
+      
           </div>
         </>
       )}

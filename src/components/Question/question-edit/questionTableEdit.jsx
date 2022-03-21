@@ -23,6 +23,18 @@ export default function QuestionTableEdit(props) {
   const [displayVisible, setDisplayVisible] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false);
 
+  const setrubric_detail = (string) => {
+    console.log(string)
+    try {
+      JSON.parse(string)
+      return JSON.stringify(JSON.parse(string))
+    }
+    catch(err) {
+      console.log(err)
+      return string
+    }
+  }
+
   const packQuestionData = () => {
     const data = {
       id: qid,
@@ -32,7 +44,7 @@ export default function QuestionTableEdit(props) {
       max_score: maxScore,
       stem: JSON.stringify({ detail, columnLabels }),
       rubric: scoringType[0],
-      rubric_detail: scoringType.slice(2,)
+      rubric_detail: scoringType[3],
     };
     return data;
   };
@@ -42,10 +54,11 @@ export default function QuestionTableEdit(props) {
       <Form className="question-edit-form">
         <Form.Group as={Row} className="mb-3" controlId="edit--table--title">
           <Form.Label column sm={2}>
-            标题
+            题号
           </Form.Label>
           <Col sm={10}>
             <Form.Control
+              as="textarea"
               type="text"
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -98,7 +111,7 @@ export default function QuestionTableEdit(props) {
               onChange={(e) => setscoringType(e.target.value)}
             >
               console.log(scoringType);
-              <option value={"E, "}>专家打分</option>
+              <option value={'E, '}>专家打分</option>
               <option value={"A,fill_full"}>自动打分（填写及满分）</option>
             </Form.Select>
         </Form.Group>  

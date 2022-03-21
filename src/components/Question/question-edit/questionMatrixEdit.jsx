@@ -44,10 +44,11 @@ export default function QuestionMatrixEdit(props) {
       <Form className="question-edit-form">
         <Form.Group as={Row} className="mb-3" controlId="edit--attach--title">
           <Form.Label column sm={2}>
-            标题
+            题号
           </Form.Label>
           <Col sm={10}>
             <Form.Control
+              as="textarea"
               type="text"
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}

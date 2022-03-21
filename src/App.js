@@ -25,10 +25,17 @@ import SideMenuExpert from "./components/Expert/sideMenuExpert"
 import SideMenuManager from "./components/Manager/sideMenuManager";
 import QnaireQuestionEdit from "./components/Questionnaire/qnaireQuestionEdit";
 import QnaireQuestionAnswering from "./components/Questionnaire/qnaireQuestionAnswering";
-import QnaireIndicatorEdit from "./components/Questionnaire/qnaireIndicatorEdit";
+import AdminIndicatorEdit from "./components/Admin/expert_scoring/indicatorsetting";
 import RegisterForm from "./components/Loading/registerForm";
 import ManagerProgressInterface from "./components/Manager/managerProjectInterface";
 import QuestionnaireScoring from "./components/Expert/QuestionnaireScoring";
+import ExpertProcessViewTable from "./components/Admin/ExpertProcess";
+import ExpertScoringDis from "./components/Admin/expert_scoring/ExpertScoringDisExpert";
+import ExpertScoringDisExpert from "./components/Admin/expert_scoring/ExpertScoringDisExpert";
+import ExpertScoringDisQuestion from "./components/Admin/expert_scoring/ExpertScoringDisQuestion";
+import QnaireQuestionAnsweringSwitch from "./components/Questionnaire/qnaireQuestionAnsweringSwitch";
+import Expert_dis_interface from "./components/Admin/expert_scoring/expert_dis_step_interface";
+import ContentIndicator from "./components/Admin/content_view/indicator_scope";
 
 
 
@@ -72,7 +79,18 @@ const AdministratorMainPage = () => {
             <QnaireQuestionEdit />
           </Route>
           <Route path="/qnaire/:qnaire/iedit">
-            <QnaireIndicatorEdit />
+            <AdminIndicatorEdit />
+          </Route>
+          <Route path="/qnaire/:qnaire/progress">
+            <div className ="supervisor-interface">
+            <ExpertProcessViewTable/>
+            </div>
+          </Route>
+          <Route path="/qnaire/:qnaire/expertScore/">
+            <Expert_dis_interface/>
+          </Route>
+          <Route path="/qnaire/:qnaire/contentView/">
+            <ContentIndicator/>
           </Route>
           <Route path='/data-analysis'>
             <DataAnalysisInterface />
@@ -119,7 +137,7 @@ const ExpertMainPage = () => {
           <Route path='/data-analysis'>
             <DataAnalysisInterface />
           </Route>
-          <Route path='/QuestionnaireScoring'>
+          <Route path='/expert/QuestionnaireScoring'>
             <QuestionnaireScoring />
           </Route>
         </Switch>
@@ -181,7 +199,7 @@ const MakeRouter = () => {
     <Switch>
       <Route exact path="/register" component={RegisterForm} />
       <Route exact path="/login" component={LoadingInterface} />
-      {/*<Route exact path="/profile" component={ProfilePage} />*/}
+      {/* <Route exact path="/profile" component={ProfilePage} /> */}
       {userRoute}
       {/*<Route exact path="/" component={MainPage} />*/}
     </Switch>

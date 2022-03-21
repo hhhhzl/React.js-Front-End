@@ -134,3 +134,6 @@ export const selectAreSubmissionsLoadingQA = (state) =>
 export const selectIsLoadingQA = (state) =>
   state.questionAnswering.questionsLoading ||
   state.questionAnswering.submissionsLoading;
+
+  export const selectAllExpertsQA = (state) =>
+  state.questionAnswering.questions.filter(u => u.rubric === "E");

@@ -26,6 +26,7 @@ export default function QnaireQuestionEdit() {
   const parsedDrafts = useMemo(
     () =>
       drafts.map((q) => {
+        console.log(q);
         const pq = {
           id: q.id,
           isRequired: q.is_required,
@@ -34,6 +35,7 @@ export default function QnaireQuestionEdit() {
           questionType: parseInt(q.question_type),
           rubric: q.rubric,
           title: q.title,
+          rubric_detail: q.rubric_detail,
         };
         try {
           return {

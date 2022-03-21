@@ -23,6 +23,8 @@ import  QuestionMultipleChoicesEdit from "../Question/question-edit/questionMult
 import  QnaireQuestionAnswering from "../Questionnaire/qnaireQuestionAnswering";
 import QnaireQuestionAnsweringTable from "../Questionnaire/qnaireQuestionAnsweringTable";
 import ActionsFormatter from "../User/Project/userProjectTable"
+import QnaireQuestionAnsweringSwitch from "../Questionnaire/qnaireQuestionAnsweringSwitch";
+import QnaireQuestionAnsweringSwitchExpertScoring from "../Questionnaire/qnaireQuestionAnsweringSwitchExpertScoring(1)";
 /*const { SearchBar } = Search;
 function ActionsFormatter(props) {
     return (
@@ -32,10 +34,18 @@ function ActionsFormatter(props) {
             </Link>
             {/*<Link to={`/qnaire/${props.value.id}/iedit`}>
                 <Button title={props.value.name}>编辑指标</Button>
-    </Link>*//*}*/
+    </Link>*/
 /*        </div>
     );
 }*/
+
+const questionIndex = () => {
+  return (
+    <div className = "questionIndex">
+      
+    </div>    
+  )
+}
 const questioncontent = () => {
     return (
       <div className="cardOne">
@@ -47,8 +57,8 @@ const questioncontent = () => {
           </Card.Header>
           <Card.Body className="questionbody">
             <div className="questioncontentcard">
+              <QnaireQuestionAnsweringSwitchExpertScoring />
             {/* <QnaireQuestionAnsweringTable questionType={1}/> */}
-            <QnaireQuestionAnswering/>
             <Button  className="lastquestion" type="submit" variant="outline-success">
              上一题
             </Button>
@@ -61,6 +71,7 @@ const questioncontent = () => {
       </div>
     );
   };
+  
 const QuestionnaireScoring = () => {
     return (
       <div className="cardtwo">
@@ -76,7 +87,7 @@ const QuestionnaireScoring = () => {
             请仔细填写请仔细填写请仔细填写请仔细填写请仔细填写请仔细填写请仔细填写请仔细填
             </div>
             <div className="scorecontentcard">
-            <h1>90</h1>
+              <h2>90</h2>
             </div>
             <Button  className="submitbutton" type="submit" variant="outline-success">
             提交

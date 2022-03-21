@@ -119,6 +119,8 @@ export default function SupervisorEditProjectInterface(props) {
 
                     {/* The form to edit data for each project */}
                     <Form  className="S-project-modal-form"  noValidate validated={validated} id="addProject">
+                        <Row>
+                            <Col xs ={6}>
                         <Form.Group className="mb-3" controlId="nomeaning">
                             <Form.Label>项目名称*</Form.Label>
                             <Form.Control
@@ -193,15 +195,15 @@ export default function SupervisorEditProjectInterface(props) {
                                 <option value="false">不计分</option>
                             </Form.Select>
                         </Form.Group>
+                        </Col>
 
-
-
-                        <Form.Group as={Row} className="starttime1">
+                        <Col xs ={6}>
+                        <Form.Group  className="mb-3">
                             <Form.Label>开始时间*</Form.Label>
                             <Row>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={8}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -215,14 +217,14 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             年
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                       <Col sm={7}>
+                                       <Col sm={11}>
                                         <Form.Control
                                             required
                                             type="number"
@@ -236,14 +238,14 @@ export default function SupervisorEditProjectInterface(props) {
                                             }}
                                         />
                                       </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             月
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                      <Col sm={7}>
+                                      <Col sm={11}>
                                         <Form.Control
                                             required
                                             type="number"
@@ -257,7 +259,7 @@ export default function SupervisorEditProjectInterface(props) {
                                             }}
                                         />
                                      </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             日
                                         </Form.Label>
                                     </Form.Group>
@@ -332,7 +334,7 @@ export default function SupervisorEditProjectInterface(props) {
                         </Form.Group>
 
 
-                        <Form.Group className="state1">
+                        <Form.Group className="mb-3">
                             <Form.Label>状态*</Form.Label>
                             <Form.Select
                                 required
@@ -348,6 +350,8 @@ export default function SupervisorEditProjectInterface(props) {
                                 <option value="false">停用</option>
                             </Form.Select>
                         </Form.Group>
+                        </Col>
+                        </Row>
 
                     </Form>
                 </Modal.Body>

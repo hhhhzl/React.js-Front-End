@@ -23,6 +23,18 @@ export default function QuestionAttachmentEdit(props) {
   const [displayVisible, setDisplayVisible] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false);
 
+  const setrubric_detail = (string) => {
+    console.log(string)
+    try {
+      JSON.parse(string)
+      return JSON.stringify(JSON.parse(string))
+    }
+    catch(err) {
+      console.log(err)
+      return string
+    }
+  }
+
 
   const packQuestionData = () => {
     const data = {
@@ -33,7 +45,7 @@ export default function QuestionAttachmentEdit(props) {
       max_score: maxScore,
       stem: JSON.stringify({ detail }),
       rubric: scoringType[0],
-      rubric_detail: scoringType.slice(2,)
+      rubric_detail: scoringType[3],
     };
     return data;
   };
@@ -43,11 +55,12 @@ export default function QuestionAttachmentEdit(props) {
       <Form className="question-edit-form">
         <Form.Group as={Row} className="mb-3" controlId="edit--attach--title">
           <Form.Label column sm={2}>
-            标题
+            题号
           </Form.Label>
           <Col sm={10}>
             <Form.Control
               type="text"
+              as="textarea"
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
             />

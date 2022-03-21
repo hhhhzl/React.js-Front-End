@@ -13,6 +13,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Questionnaire Page */
+.inverse-container{
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
 
 .qnaire-q-main-container {
   display: grid;

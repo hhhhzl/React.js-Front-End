@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import {
   apiGetAllQuestions,
+  apiGetQuestion,
   apiCreateQuestion,
   apiUpdateQuestion,
   apiDeleteQuestion,
@@ -28,6 +29,15 @@ export const fetchAllQuestionsQE = createAsyncThunk(
     return response.data;
   }
 );
+
+export const getQuestionQE = createAsyncThunk(
+  "questionEdit/getQuestionQE",
+  async ({QuestionID}) =>{
+    const response = await apiGetQuestion(QuestionID);
+    return response.data;
+    
+  }
+)
 
 export const createQuestionQE = createAsyncThunk(
   "questionEdit/createQuestionQE",
@@ -146,6 +156,7 @@ const questionEditSlice = createSlice({
       state.error = action.error.message;
       // state.loading = false;
     },
+
   },
 });
 

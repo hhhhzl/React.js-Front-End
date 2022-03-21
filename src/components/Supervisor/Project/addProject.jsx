@@ -1,15 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form'
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Row, Collapse, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { CreateProject } from '../../../state/slices/projs';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllUsers, selectLastUpdatedAtUsers } from '../../../state/slices/users';
 import { shouldRefetchList } from '../../../state/store';
+import data from "../Institution/datatest..json";
+import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+import BootstrapTable from 'react-bootstrap-table-next';
+import SelectSearch, { fuzzySearch } from 'react-select-search';
+import paginationFactory, { PaginationProvider, SizePerPageDropdownStandalone } from 'react-bootstrap-table2-paginator';
+import { BottomNavigation } from '@material-ui/core';
+import { use } from 'echarts';
+import Badge from 'react-bootstrap/Badge'
 
+const { SearchBar, ClearSearchButton } = Search;
 
 
 export default function SupervisorEditProjectInterface(props) {
+
+    const columns = [
+        {
+            dataField:'id',
+            text:'ID',
+            hidden: true
+        },
+        {
+            dataField: 'label',
+            text: '机构(升/降)',
+            sort: true
+        },
+    ]
+
+    const [treedata, settreedata] =  useState(data);
+
     const dispatch = useDispatch();
 
     // refresh admins
@@ -24,10 +49,14 @@ export default function SupervisorEditProjectInterface(props) {
     const admins = useSelector((state) => state.users.items.filter(u => u.user_type === "A"));
 
     const [show, setShow] = useState(false);
+    const [scrollswitch, setScrollswitch] = useState(false);
     const [validated, setValidated] = useState(false);
+    const [value, setValue] = useState("");
+    const [multipleValues, setMultipleValues] = useState([]);
 
     const [name, setName] = useState("");
     const [admin, setAdmin] = useState("");
+    
     const [start_date_year, setStartDateYear] = useState("");
     const [start_date_month, setStartDateMonth] = useState("");
     const [start_date_day, setStartDateDay] = useState("");
@@ -39,7 +68,7 @@ export default function SupervisorEditProjectInterface(props) {
     const [is_active, setIsActive] = useState("");
 
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {setShow(false);setMultipleValues([]);setScrollswitch(false);setLinkedInstitution("")}
     const handleShow = () => setShow(true);
 
     // put '0' in front if 1-9 month or day
@@ -85,7 +114,107 @@ export default function SupervisorEditProjectInterface(props) {
         setValidated(true);
     };
 
+    const selectRow = {
+        mode: 'checkbox',
+        bgColor: 'gray',
+        
+        hideSelectAll: false,
+        clickToSelect: true,
+        onSelect: (row, isSelect, rowIndex, e) => {
+            if (isSelect){
+                setMultipleValues([...multipleValues,row]);
+            }else{
+                const restData =[]
+                multipleValues.forEach((elem) => {
+                        if (row !== elem){
+                            restData.push(elem)
+                        }
+                    });
+            
+                setMultipleValues([...restData]);
+            }  
+            
+          },
+          onSelectAll: (isSelect, rows, e) => {
+              if (isSelect){
+                setMultipleValues(rows);
+              }else{
+                setMultipleValues([]);
 
+              }
+        }
+        
+      };
+
+    const [linkedInstitution, setLinkedInstitution] = useState("")
+
+    const handleSearch = (propes) => {
+        propes.onSearch(linkedInstitution.value);
+    };
+
+    const buttonDelete = (row) => {
+        if (multipleValues.includes(row)){
+            const restData =[]
+            multipleValues.forEach((elem) => {
+                    if (row !== elem){
+                        restData.push(elem)
+                    }
+                });
+        
+            setMultipleValues([...restData]);
+        }else{
+            setMultipleValues([...multipleValues,row]);
+
+        }
+        
+    }
+
+
+    const searchSwitch = () => {
+        if (linkedInstitution.value != ""){
+            setScrollswitch(true)
+        }else{
+            setScrollswitch(false)
+        }
+    };
+
+    
+
+    const rowEvents = {
+        onClick: (e, row, rowIndex) => {
+            console.log(e)
+            if (multipleValues.includes(row)){
+                const restData =[]
+                multipleValues.forEach((elem) => {
+                        if (row !== elem){
+                            restData.push(elem)
+                        }
+                    });
+            
+                setMultipleValues([...restData]);
+            }else{
+                setMultipleValues([...multipleValues,row]);
+
+            }
+            
+        }
+
+    
+      };
+
+      const handleswitch = () => {
+          setScrollswitch(false)
+      }
+
+
+    
+
+
+
+
+      
+
+      
     return (
         <>
             <Button className="supevisorButton"  variant="primary" onClick={handleShow}>
@@ -107,12 +236,14 @@ export default function SupervisorEditProjectInterface(props) {
                         </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
+                    
                     <Form noValidate validated={validated} id="addProject">
+                  <Row>
+                    <Col xs={6}>
                         <Form.Group className="mb-3" controlId="nomeaning">
                             <Form.Label>项目名称*</Form.Label>
                             <Form.Control
                                 required
-                                size="lg"
                                 type="text"
                                 placeholder="请输入项目名称"
                                 value={name}
@@ -126,11 +257,93 @@ export default function SupervisorEditProjectInterface(props) {
                             </Form.Text>
                         </Form.Group>
 
+                    
+                        {/*
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>绑定机构</Form.Label>
-                            <Form.Control type="text" placeholder="待升级功能" />
+                            <Form.Control show ={false} value = {value} type="text" placeholder="待升级功能"/>
                         </Form.Group>
+                        */}
+                              
+                            <ToolkitProvider  
+                              keyField="id"
+                              data={ data }
+                              columns={ columns }  
+                              search
+                            >
+                                {props => (
+                            <div className="expanded-container">
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                     <Form.Label>绑定机构*</Form.Label>
+                                     <br/>
+                                    
+                                     {multipleValues == [] ? 
+                                     <></>
+                                     :
+                                     multipleValues.map((elem) =>
+                                      <span>
+                                        <Badge pill bg="info" size = 'sm' style = {{color:"white"}} >{elem.label}</Badge>{' '}
+                                        </span>                               
+                                     )
+                                    }
+                    
+                                     <Row>
 
+                                         <Col xs ={8}>
+                                     <Form.Control
+                                     type="text"
+                                     placeholder="请搜索绑定机构"
+                                     ref={ n => setLinkedInstitution(n)}
+                                     onChange={() => {
+                                         handleSearch({...props.searchProps});searchSwitch();
+                                }
+                            }     
+                                />
+                                </Col>
+                                <Col xs ={4}>
+                                    {scrollswitch ? 
+                                        <Button  variant="outline-secondary" size ="sm" onClick={() => setScrollswitch(false)}>关闭搜索</Button>
+                                        :
+                                        <Button  variant="outline-secondary" size ="sm" onClick={() => setScrollswitch(true)}>点击搜索机构</Button>
+
+                                    }
+                                
+                                </Col>
+                                </Row>
+                                
+                                {/*
+                                     <SearchBar
+                                     { ...props.searchProps }
+                                     placeholder = '搜索机构'
+                                     srText = {false}
+                                     onSearch = {() =>
+                                         setScrollswitch(!scrollswitch)
+                                     }
+                                      />
+                                    */}
+                                
+                                <Collapse in= {scrollswitch}>
+                                 <div className ="scroll">
+                                <BootstrapTable 
+                                { ...props.baseProps}
+                                 
+                                 hover = {true}
+                                 condensed ={true}
+                                 sort={ { dataField: 'label', order: 'asc' } }
+                                 selectRow = {selectRow}          
+                                 classes ="custom-row-class"
+                                 rowEvents={ rowEvents }
+                                />  
+                                <Button  variant="outline-secondary" size ="sm" onClick={() =>{props.searchProps.onClear();}}>清除搜索记录</Button> 
+
+                                </div>
+                               </Collapse>  
+                               </Form.Group>                            
+                            </div>
+                            )
+                            }
+                            </ToolkitProvider>
+                        
+                
                         <Form.Group className="mb-3">
                             <Form.Label>管理员*</Form.Label>
                             <Form.Select
@@ -182,15 +395,16 @@ export default function SupervisorEditProjectInterface(props) {
                                 <option value="false">不计分</option>
                             </Form.Select>
                         </Form.Group>
+                        </Col>
 
 
-
-                        <Form.Group as={Row} className="mb-4">
+                        <Col xs={6}>
+                        <Form.Group className="mb-3">
                             <Form.Label>开始时间*</Form.Label>
                             <Row>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={8}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -204,14 +418,14 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             年
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={7}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -225,14 +439,14 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             月
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={7}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -247,7 +461,7 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             日
                                         </Form.Label>
                                     </Form.Group>
@@ -257,7 +471,7 @@ export default function SupervisorEditProjectInterface(props) {
                                 <Form.Label>结束时间*</Form.Label>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={8}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -271,14 +485,14 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             年
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={7}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -292,14 +506,14 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             月
                                         </Form.Label>
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                                        <Col sm={7}>
+                                        <Col sm={11}>
                                             <Form.Control
                                                 required
                                                 type="number"
@@ -313,7 +527,7 @@ export default function SupervisorEditProjectInterface(props) {
                                                 }}
                                             />
                                         </Col>
-                                        <Form.Label column sm={2}>
+                                        <Form.Label column sm={1}>
                                             日
                                         </Form.Label>
                                     </Form.Group>
@@ -322,7 +536,7 @@ export default function SupervisorEditProjectInterface(props) {
                         </Form.Group>
 
 
-                        <Form.Group className="mb-5">
+                        <Form.Group className="mb-3">
                             <Form.Label>状态*</Form.Label>
                             <Form.Select
                                 required
@@ -338,9 +552,11 @@ export default function SupervisorEditProjectInterface(props) {
                                 <option value="false">停用</option>
                             </Form.Select>
                         </Form.Group>
-
-                    </Form>
+                        </Col>
+                    </Row>
+                    </Form> 
                 </Modal.Body>
+                
                 <Modal.Footer>
                   
                     <Button  variant="secondary" onClick={handleClose}>
@@ -355,3 +571,4 @@ export default function SupervisorEditProjectInterface(props) {
         </>
     );
 }
+

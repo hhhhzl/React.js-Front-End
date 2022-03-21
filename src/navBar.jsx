@@ -39,7 +39,6 @@ export default function NavBarTest(props) {
                                     alt="无法显示图片"
                                     roundedCircle
                                 />
-
                             </div>
                         }
                         id="collasible-nav-dropdown"

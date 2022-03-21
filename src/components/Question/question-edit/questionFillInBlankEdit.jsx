@@ -15,22 +15,23 @@ function QuestionFillInBlankOptionsEditorRow(props) {
   const [blanktype, setBlanktype] = useState(props.option?.blanktype || "text");
   const [restrictions, setRestrictions] = useState(props.option?.restrictions || {});
   const [width, setWidth] = useState(props.option?.width || 3);
+  const [ratio, setRatio] = useState(props.option?.ratio || 0);
   
-
-
   useEffect(() => {
     props.handleChange({
       blanktype,
       restrictions,
       width,
+      ratio,
     });
-  }, [blanktype, restrictions, width]);
+  }, [blanktype, restrictions, width,ratio]);
 
   return (
     <tr>
       <td>{props.rowIdx + 1}</td>
       <td>
         <Form.Select
+          size = 'sm'
           value={blanktype}
           onChange={(e) => {
             setBlanktype(e.target.value);
@@ -50,10 +51,20 @@ function QuestionFillInBlankOptionsEditorRow(props) {
       </td>
       <td>
         <Form.Control
+          size = 'sm'
           type="number"
           min={0}
           value={width}
           onChange={(e) => setWidth(parseInt(e.target.value || 3))}
+        ></Form.Control>
+      </td>
+      <td>
+        <Form.Control
+          type="number"
+          size = 'sm'
+          min={0}
+          value={ratio}
+          onChange={(e) => setRatio(parseInt(e.target.value || 0))}
         ></Form.Control>
       </td>
     </tr>
@@ -70,7 +81,12 @@ export default function QuestionFillInBlankEdit(props) {
   const [detail, setDetail] = useState(props.detail || "");
   const [minScore, setMinScore] = useState(props.minScore || 0);
   const [maxScore, setMaxScore] = useState(props.maxScore || 0);
-  const [scoringType, setscoringType] = useState("");
+  const [scoringType, setscoringType] = useState(
+    props.rubric == 'A'
+    ? "A," + props.rubric_detail
+    : "E, " || ""
+  );
+  console.log(scoringType);
   const [optionInfo, setOptionInfo] = useState(
     props.options
       ? props.options.map((option) => ({
@@ -86,7 +102,8 @@ export default function QuestionFillInBlankEdit(props) {
   const [displayVisible, setDisplayVisible] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false);
   const [optionsEditorVisible, setOptionsEditorVisible] = useState(false);
-
+ 
+  console.log(scoringType);
   const handleChangeOption = (idx, newData) => {
     setOptionInfo(
       optionInfo.map((data, i) =>
@@ -98,16 +115,18 @@ export default function QuestionFillInBlankEdit(props) {
   const renderOptionsEditor = () => {
     return (
       <div className="fib-options-editor">
-        <Table
+        <Table 
+          responsive="md"
           id={`${qid}--fib-options-editor`}
           aria-describedby={`${qid}--fib-options-editor--helptext`}
         >
           <thead>
             <tr>
-              <th>序号</th>
-              <th>类别</th>
-              <th>限制</th>
-              <th>宽度</th>
+              <th width="1%">序号</th>
+              <th width="23%">类别</th>
+              <th width="27%">限制</th>
+              <th width="20%">宽度</th>
+              <th width="15%">占比</th>
             </tr>
           </thead>
           <tbody>
@@ -141,12 +160,24 @@ export default function QuestionFillInBlankEdit(props) {
       for (let i = 0; i < padLength; i++) {
         pad[i] = {
           hiddenKey: uuidv4(),
-          option: { width: 2 },
+          option: { width: 2, ratio: 0 },
         };
       }
       setOptionInfo([...optionInfo, ...pad]);
     }
   };
+
+  const setrubric_detail = (string) => {
+    console.log(string)
+    try {
+      JSON.parse(string)
+      return JSON.stringify(JSON.parse(string))
+    }
+    catch(err) {
+      console.log(err)
+      return string
+    }
+  }
 
   const packQuestionData = () => {
     const data = {
@@ -160,8 +191,8 @@ export default function QuestionFillInBlankEdit(props) {
         options: optionInfo.map((o) => o.option),
       }),
       rubric: scoringType[0],
-      rubric_detail: scoringType.slice(2,)
-    };
+      rubric_detail: scoringType.slice(2)
+    }
     return data;
   };
 
@@ -171,10 +202,11 @@ export default function QuestionFillInBlankEdit(props) {
       <Form className="question-edit-form">
         <Form.Group as={Row} className="mb-3" controlId="edit--fib--title">
           <Form.Label column sm={2}>
-            标题
+            题号
           </Form.Label>
           <Col sm={10}>
             <Form.Control
+              as="textarea"
               type="text"
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -227,8 +259,9 @@ export default function QuestionFillInBlankEdit(props) {
             <Form.Select
               
               onChange={(e) => setscoringType(e.target.value)}
+              defaultValue={scoringType}
             > 
-              
+              <option value={""}>请选择评分方式</option>
               <option value={"A,extreme_model"}>自动打分-去极值平均值模型</option>
               <option value={"A,reduce_diff"}>自动打分-差异缩小模型模型</option>
               <option value={"A,increase_diff"}>自动打分-差异扩大模型模型</option>
@@ -258,6 +291,26 @@ export default function QuestionFillInBlankEdit(props) {
             >
               {optionsEditorVisible ? "隐藏" : "显示"}
             </Button>
+
+            <Button
+              variant="outline-success"
+              onClick={buildOptionInfo}
+              style={{
+                display: optionsEditorVisible ? "inline-block" : "none",
+              }}
+            >
+              刷新
+            </Button>
+          </Col>
+          <Collapse in={optionsEditorVisible}>
+            <div id={`${qid}--fib-options-editor-collapse`}>
+              {renderOptionsEditor()}
+            </div>
+          </Collapse>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3" controlId="edit--fib--save-abort">
+          <Col sm={12}>
 
             <Button
               variant="outline-success"

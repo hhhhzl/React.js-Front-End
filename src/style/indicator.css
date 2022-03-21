@@ -1,12 +1,12 @@
 .indicator-edit-main-container {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 8fr 3fr;
 }
 
 .indicator-edit-indicators-container,
 .indicator-edit-incomplete-container {
   padding: 1em;
-  width:750px;
+  width:100%;
 }
 
 .indicator-edit-indicators-container .tab-pane {

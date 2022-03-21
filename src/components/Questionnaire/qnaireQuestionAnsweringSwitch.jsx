@@ -1,5 +1,5 @@
 import "../../style/qnaire.css";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect,useState, useMemo } from "react";
 import QuestionDisplayCard from "../Question/questionDisplayCard";
 import { Spinner, Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,12 +16,13 @@ import { mapQuestionType } from "../../constants/maps";
 import { selectAuthUserOrg } from "../../state/slices/auth";
 import { useParams } from "react-router-dom";
 
-export default function QnaireQuestionAnswering() {
+export default function QnaireQuestionAnsweringSwitch() {
   const { qnaire } = useParams();
-
   const dispatch = useDispatch();
   const curUserOrg = useSelector(selectAuthUserOrg);
+  const [question_id, setquestion_id] = useState(0);
   useEffect(() => {
+      
     dispatch(fetchAllQuestionsQA({ qnaire }));
     dispatch(
       fetchAllSubmissionsQA({ question__qnaire: qnaire, org: curUserOrg })
@@ -92,26 +93,13 @@ export default function QnaireQuestionAnswering() {
   const isLoading = useSelector(selectIsLoadingQA);
 
   return (
-    <div className="qnaire-q-main-container">
+    <div className = "inverse-container">
       {isLoading ? (
-        <div className="loading-spinner-container">
+        <div >
           <Spinner animation="border" />
         </div>
       ) : (
         <>
-          <div className="qnaire-q-question-display">
-            {parsedQuestions.map((data, idx) => (
-              <Card key={data.id} id={`qnaire-question-${idx + 1}`}>
-                <Card.Body>
-                  <QuestionDisplayCard
-                     qid={data.id}
-                    onQuestionSubmit={onQuestionSubmit}
-                    {...data}
-                  />
-                </Card.Body>
-              </Card>
-            ))}
-          </div>
           <div className="qnaire-q-question-navbar">
             <h5>问题列表</h5>
             <ol>
@@ -124,6 +112,19 @@ export default function QnaireQuestionAnswering() {
                 </li>
               ))}
             </ol>
+          </div>
+          <div className="qnaire-q-question-display">
+          {parsedQuestions.map((data, idx) => ( 
+              <Card key={data.id} id={`qnaire-question-${idx+1}`}>
+                <Card.Body>
+                <QuestionDisplayCard
+                     qid={data.id}
+                     onQuestionSubmit={onQuestionSubmit}
+                    {...data}
+                  />
+                </Card.Body>
+              </Card>
+            ))}
           </div>
         </>
       )}

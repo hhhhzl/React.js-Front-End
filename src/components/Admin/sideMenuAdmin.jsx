@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import HomeIcon from "@material-ui/icons/Home";
 import AssignmentIcon from "@material-ui/icons/AssignmentOutlined";
@@ -9,13 +9,16 @@ import AssistantIcon from "@material-ui/icons/AssistantOutlined";
 import DataUsageIcon from "@material-ui/icons/DataUsageOutlined";
 import { Nav } from "react-bootstrap";
 import { Switch, Route, Link, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { ArrowForward } from "@material-ui/icons";
 
 const SideMenuQnaireAdmin = () => {
+  const [open, setopen] = useState(false);
 
   const { qnaire } = useParams();
 
   return (
-    <>
+    <div className ="sidebar-max">
       <Navbar className="side-text">
         <Link
           className="nav-link"
@@ -36,36 +39,45 @@ const SideMenuQnaireAdmin = () => {
       </Navbar>
       <Navbar className="side-text">
         <Link className="nav-link" style={{ color: "white" }} 
-        to={`/qnaire/${qnaire}/`}>
+        to={`/qnaire/${qnaire}/progress`}>
           <DataUsageIcon /> 填报进度
         </Link>
       </Navbar>
       <Navbar className="side-text">
-        <Link className="nav-link" style={{ color: "white" }} to={`/qnaire/${qnaire}/`}>
-          <AssignmentIndIcon /> 手动打分
+        <Link className="nav-link" style={{ color: "white" }} to={`/qnaire/${qnaire}/expertScore/`}>
+          <AssignmentIndIcon /> 专家打分
         </Link>
       </Navbar>
       <Navbar className="side-text">
         <Link className="nav-link" style={{ color: "white" }} to={`/qnaire/${qnaire}/`}>
-          <AssignmentTurnedInIcon /> 分数编辑
+        <AssignmentTurnedInIcon /> 分数计算
         </Link>
       </Navbar>
       <Navbar className="side-text">
-        <Link className="nav-link" style={{ color: "white" }} to={`/qnaire/${qnaire}/`}>
-          <AssessmentIcon /> 分数统计
-        </Link>
-      </Navbar>
-      <Navbar className="side-text">
-        <Link className="nav-link" style={{ color: "white" }} to={`/qnaire/${qnaire}/`}>
+        <Link className="nav-link" style={{ color: "white" }} onClick ={() => setopen(!open)}>
           <AssessmentIcon /> 内容查看
         </Link>
       </Navbar>
+      {open ? (<>
+        <Navbar className="side-text">
+        <Link className="nav-link" style={{ color: "white", fontSize: "15px" }} to={`/qnaire/${qnaire}/contentView/indicatorD`}>
+        =<ArrowForward/>指标维度
+        </Link>
+      </Navbar>
+      <Navbar className="side-text">
+        <Link className="nav-link" style={{ color: "white", fontSize: "15px" }} to={`/qnaire/${qnaire}/contentView/`}>
+       =<ArrowForward />机构维度
+        </Link>
+      </Navbar>
+      </>
+      ) : <></>}
+      
       <Navbar className="side-text">
         <Link className="nav-link" style={{ color: "white" }} to="/main">
           <HomeIcon /> 返回列表
         </Link>
       </Navbar>
-    </>
+    </div>
   );
 };
 

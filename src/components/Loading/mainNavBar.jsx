@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function MainNavBar(props) {
     return (
-        <Navbar variant="light" className="app-header" style={{ maxWidth: "100vw", height: "10vh" }}>
+        <Navbar variant="light" className="app-header" style={{ maxWidth: "100vw", height: "7vh" }}>
             <Container className="nav-bar-main">
                 <Navbar.Brand>
                     <img

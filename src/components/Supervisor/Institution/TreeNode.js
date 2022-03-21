@@ -20,7 +20,7 @@ import EditTree from './EditTree';
 import DescriptionIcon from '@material-ui/icons/DescriptionTwoTone';
 import SchoolIcon from '@material-ui/icons/School';
 import SubjectIcon from '@material-ui/icons/Subject';
-import GroupWorkIcon  from '@material-ui/icons/GroupWork';
+import { Business } from '@material-ui/icons';
 
 const TreeList = ({tree = [], branch}) => {
     const [rawData, setrawData] = useState(tree);
@@ -32,16 +32,15 @@ const TreeList = ({tree = [], branch}) => {
         data.forEach((elem) => {
           const node = {
             id: elem.id,
-            label: elem.label,
-            branch: elem.branch,
-            parentOrg: elem.parentOrg,
+            name: elem.name,
+            parent_org: elem.parent_org,
             children: [],
           };
           id2Data[node.id] = node;
-          if (elem.parentOrg === null) {
+          if (elem.parent_org === null) {
             treeRoot.push(node);
           } else {
-            id2Data[elem.parentOrg].children.push(node);
+            id2Data[elem.parent_org].children.push(node);
           }
         });
         return treeRoot;
@@ -89,7 +88,7 @@ const TreeList = ({tree = [], branch}) => {
       const[addData, setAdddata] = useState(
           {
             key: [],
-            label: '',
+            name: '',
             icon: '',
             code: '',
             address:'',
@@ -115,7 +114,7 @@ const TreeList = ({tree = [], branch}) => {
             
           const newContacts = {
               id: nextID,
-              label: addData.label,
+              name: addData.name,
               icon: 'AccountBoxIcon',
               code: addData.code,
               address:addData.address,
@@ -136,7 +135,7 @@ const TreeList = ({tree = [], branch}) => {
       const[editFormData, setEditFormData] = useState(
         {
           id: '',
-          label: '',
+          name: '',
           code: '',
           address:'',
           mail: '',       
@@ -164,7 +163,7 @@ const TreeList = ({tree = [], branch}) => {
 
         const editedData ={
             id: editFormData.id,
-            label: editFormData.label,
+            name: editFormData.name,
             code: editFormData.code,
             address: editFormData.address,
             mail: editFormData.mail,
@@ -189,7 +188,7 @@ const TreeList = ({tree = [], branch}) => {
         setEditContactId(contact.id);
         const formValues ={
             id: contact.id,
-            label: contact.label,
+            name: contact.name,
             code: contact.code,
             address: contact.address,
             mail: contact.mail,
@@ -296,32 +295,20 @@ const TreeNode = ({ node, show, handleClose, handleShow, handleAddformSubmit,han
         // trigger re-render when props.data change
         setContacts(node);
       }, [node]);
-    
-    
-
-     
+      
     return (
-        <div>
-            
-        
+        <>     
         <li className ="d-tree-node">
-            
-
             <div className = "d-flex">
-
-                {(
-                    <div >                        
-                       <PlayArrowIcon className ={`d-tree-toggler ${ childVisable ? "active" : ""}`} onClick = {() => setChildVisiblity(!childVisable)}/>
-                    </div>
+                {(<PlayArrowIcon className ={`d-tree-toggler ${ childVisable ? "active" : ""}`} onClick = {() => setChildVisiblity(!childVisable)}/>
                 )}
                      
                 {
                         level === 1  ? 
                         <div className =  "d-tree-font">
-
                         <Nav>
                             <Nav.Item >
-                                <Nav.Link style={{color: "black"}} ><AccountBalanceIcon/>{' '}{contacts.label}</Nav.Link>
+                                <Nav.Link style={{color: "black"}} ><AccountBalanceIcon/>{' '}{contacts.name}</Nav.Link>
                             </Nav.Item>
                             <DropdownButton variant="light" size = "sm" id="dropdown-item-button" title={<EditIcon/>}> 
                             <Modal show = {show1}>
@@ -336,7 +323,7 @@ const TreeNode = ({ node, show, handleClose, handleShow, handleAddformSubmit,han
                                         <Form>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>机构名称</Form.Label>
-                                                <Form.Control type="text" name = 'label' required = 'required' onChange={handleAddformchange}/>
+                                                <Form.Control type="text" name = 'name' required = 'required' onChange={handleAddformchange}/>
                                             </Form.Group>
                                             <Form.Group className="mb-3"  controlId="formBasicText">
                                                 <Form.Label>机构代码</Form.Label>
@@ -369,7 +356,7 @@ const TreeNode = ({ node, show, handleClose, handleShow, handleAddformSubmit,han
                         <div  className = "d-tree-font">
                             <Nav>
                             <Nav.Item >
-                                <Nav.Link style={{color: "black"}} >{level === 2? <GroupWorkIcon  style={{color:"darkslategray"}} /> : <SchoolIcon  style={{color:"darkgreen"}} />}{' '}{contacts.label}</Nav.Link>
+                                <Nav.Link style={{color: "black"}} >{level === 2? <Business  style={{color:"darkslategray"}} /> : <SchoolIcon  style={{color:"darkgreen"}} />}{' '}{contacts.name}</Nav.Link>
                             </Nav.Item>                                                     {/* 分院和研究所的ICON */}
                             
                             <DropdownButton variant="light" size = "sm" id="dropdown-item-button" title={<EditIcon/>}>
@@ -398,7 +385,7 @@ const TreeNode = ({ node, show, handleClose, handleShow, handleAddformSubmit,han
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>机构名称</Form.Label>
-                            <Form.Control type="text" name = 'label' required = 'required' onChange={handleAddformchange}/>
+                            <Form.Control type="text" name = 'name' required = 'required' onChange={handleAddformchange}/>
                         </Form.Group>
                         <Form.Group className="mb-3"  controlId="formBasicText">
                             <Form.Label>机构代码</Form.Label>
@@ -472,7 +459,7 @@ const TreeNode = ({ node, show, handleClose, handleShow, handleAddformSubmit,han
              
              
         </li>
-        </div>
+        </>
 
         
     )

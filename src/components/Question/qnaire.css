@@ -13,7 +13,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Questionnaire Page */
-
 .qnaire-q-main-container {
   display: grid;
   grid-template-columns: 80% 20%;
@@ -187,7 +186,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .mc-options-editor .fib-options-editor {
   width: 100%;
-  padding-top: 1em;
+  padding-top: 3em;
   padding-bottom: 0;
 }
 
@@ -215,3 +214,5 @@ input[type="number"]::-webkit-outer-spin-button {
   display: inline;
   width: 10em;
 }
+
+

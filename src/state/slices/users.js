@@ -77,3 +77,4 @@ export const selectErrorUsers = (state) => state.users.error;
 export const selectIsLoadingUsers = (state) => state.users.loading;
 export const selectLastUpdatedAtUsers = (state) => state.users.lastUpdatedAt;
 export const selectAllAdmins = (state) => state.users.items.filter(u => u.user_type === "A");
+export const selectAllExperts = (state) => state.users.items.filter(u => u.user_type === "E");

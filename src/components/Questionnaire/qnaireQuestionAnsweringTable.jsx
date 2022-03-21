@@ -104,8 +104,7 @@ const onQuestionSubmit = (answer, questionID, submissionID) => {
             {parsedQuestions.map((data,idx) => (
               <Card key={data.id} id={`qnaire-question-${idx + 1}`}>
                 <Card.Body>
-                  <QuestionDisplayCard 
-                    
+                  <QuestionDisplayCard
                     qid={data.id}
                     onQuestionSubmit={onQuestionSubmit}
                     {...data}

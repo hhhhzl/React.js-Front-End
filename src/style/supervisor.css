@@ -50,6 +50,10 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
     margin: 0;
 }
 
+.topButton{
+  margin-left: 10px;
+}
+
 
 
 /* Tree */
@@ -58,8 +62,8 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
     padding: 0;
   }
   
-  .d-tree-node{
-    padding: 0rem 15px;
+.d-tree-node{
+    padding: 0rem 10px;
   
   }
   
@@ -68,7 +72,10 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
   }
   
   .d-tree-font{
-    font-size: 13pt;
+    margin-left: -5%;
+    margin-top: -4%;
+    padding-bottom: 2%;
+    font-size: 12pt;
   }
   
   .list{
@@ -113,13 +120,13 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
 } */
 .supervisor-edit-modal{
   width:800px;
-  height:500px;
+  height:flex;
 }
 
 /* supervisor页面三项功能里面的modal框修改 */
 .modal-content{
   width:900px;
-  height:640px;
+  height:max-content;
   margin-left:-200px;
   margin-top:-20px;
   position: relative;
@@ -134,20 +141,11 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
 } 
 .mb-3{
 
-  width:400px;
+  width:390px;
 }
 .indicator-edit-modal{
   width:1000px;
   height:500px;
-}
-.mb-4{
-  margin-top: -470px;
-  margin-left:500px;
-}
-.mb-5{
-  margin-left:510px;
-  margin-top:-30px;
-  width:300px;
 }
 /* .modal-footer{
   margin-top:-50px;
@@ -256,7 +254,8 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
   margin-bottom: -10px;
 }
 .addinstitution-{
-  margin-top:30px;
+  margin-top:15px;
+  padding-bottom: 10px;
 }
 .addupperinstitution-{
   margin-top:20px;
@@ -269,4 +268,13 @@ input.phone-number[type=number]::-webkit-inner-spin-button, input.phone-number[t
 .addlowerinstitution-{
   margin-top:20px;
   margin-bottom: -10px;
+}
+
+.scroll{
+  max-height: 20rem;
+  overflow: auto;
+}
+
+.expanded-container{
+  width: 45%;
 }
